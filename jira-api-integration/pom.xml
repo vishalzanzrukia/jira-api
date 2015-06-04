@@ -1,0 +1,61 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.vishal.jira.api</groupId>
+  <artifactId>jira-api-integration</artifactId>
+  <packaging>jar</packaging>
+  <version>1</version>
+  <name>jira-api-integration</name>
+  <url>http://maven.apache.org</url>
+  <properties>
+  	<maven.compiler.source>1.7</maven.compiler.source>
+  	<maven.compiler.target>1.7</maven.compiler.target>
+  	<poi-version>3.12</poi-version>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- Apache POI -->
+    <dependency>
+		<groupId>org.apache.poi</groupId>
+		<artifactId>poi</artifactId>
+		<version>${poi-version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.apache.poi</groupId>
+		<artifactId>poi-ooxml</artifactId>
+		<version>${poi-version}</version>
+	</dependency>
+	<dependency>
+    	<groupId>org.apache.poi</groupId>
+    	<artifactId>poi-ooxml-schemas</artifactId>
+    	<version>${poi-version}</version>
+	</dependency>
+	<dependency>
+    	<groupId>org.apache.xmlbeans</groupId>
+    	<artifactId>xmlbeans</artifactId>
+    	<version>2.6.0</version>
+	</dependency>
+  </dependencies>
+  
+  <build>
+      <plugins>
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-jar-plugin</artifactId>
+              <version>2.3.1</version>
+              <configuration>
+                  <archive>
+                      <manifest>
+                          <mainClass>com.vishal.jira.api.App</mainClass>
+                      </manifest>
+                  </archive>
+              </configuration>
+          </plugin>
+      </plugins>
+  </build>
+</project>
