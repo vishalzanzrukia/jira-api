@@ -19,6 +19,28 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    
+    <!-- json lib -->
+    <dependency>
+		<groupId>org.codehaus.jettison</groupId>
+		<artifactId>jettison</artifactId>
+		<version>1.3.7</version>
+	</dependency>
+    
+    <!-- Jira rest client -->
+    <dependency>
+	  <groupId>com.atlassian.jira</groupId>
+	  <artifactId>jira-rest-java-client-core</artifactId>
+	  <version>3.0.0</version>
+	</dependency>
+    
+    <!-- http client -->
+    <dependency>
+		<groupId>org.apache.httpcomponents</groupId>
+		<artifactId>httpclient</artifactId>
+		<version>4.5</version>
+	</dependency>
+    
     <!-- Apache POI -->
     <dependency>
 		<groupId>org.apache.poi</groupId>

@@ -2,8 +2,8 @@ package com.vishal.jira.api;
 
 import java.util.Set;
 
+import com.vishal.jira.api.domain.Issue;
 import com.vishal.jira.api.excel.ExcelToIssueDataExtractor;
-import com.vishal.jira.api.pojo.Issue;
 
 
 /**

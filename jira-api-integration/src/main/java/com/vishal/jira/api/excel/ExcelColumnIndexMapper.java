@@ -2,9 +2,9 @@ package com.vishal.jira.api.excel;
 
 import org.apache.poi.ss.usermodel.Row;
 
+import com.vishal.jira.api.domain.Issue;
 import com.vishal.jira.api.mapper.RowMappable;
 import com.vishal.jira.api.mapper.SimpleExcelIssueMapper;
-import com.vishal.jira.api.pojo.Issue;
 
 
 /**
@@ -17,6 +17,7 @@ public class ExcelColumnIndexMapper {
 
   private int issueIdCI;
   private int descriptionCI;
+  private int summaryCI;
   private int typeCI;
   private int statusCI;
   private int priorityCI;
@@ -44,6 +45,7 @@ public class ExcelColumnIndexMapper {
         Issue issue = new Issue(row.getCell(projectNameCI));
         issue.setIssueId(row.getCell(issueIdCI));
         issue.setDescription(row.getCell(descriptionCI));
+        issue.setSummary(row.getCell(summaryCI));
         issue.setType(row.getCell(typeCI));
         issue.setStatus(row.getCell(statusCI));
         issue.setPriority(row.getCell(priorityCI));
@@ -91,6 +93,16 @@ public class ExcelColumnIndexMapper {
    */
   public void setDescriptionCI(int descriptionCI) {
     this.descriptionCI = descriptionCI;
+  }
+
+  /**
+   * set issue summary column index<BR>
+   * <STRONG>NOTE :</STRONG> index starts from <STRONG>0</STRONG>
+   * 
+   * @param summaryCI
+   */
+  public void setSummaryCI(int summaryCI) {
+    this.summaryCI = summaryCI;
   }
 
   /**

@@ -14,8 +14,8 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import com.vishal.jira.api.domain.Issue;
 import com.vishal.jira.api.mapper.RowMappable;
-import com.vishal.jira.api.pojo.Issue;
 import com.vishal.jira.api.util.ExcelUtils;
 import com.vishal.jira.api.util.GenericUtils;
 
