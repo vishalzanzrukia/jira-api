@@ -1,7 +1,7 @@
 package com.vishal.jira.api;
 
-import com.vishal.jira.api.excel.ExcelColumnIndexMapper;
-import com.vishal.jira.api.excel.SimpleExcelConfig;
+import com.plugin.jira.api.excel.ExcelColumnIndexMapper;
+import com.plugin.jira.api.excel.SimpleExcelConfig;
 
 public class MyConfig extends SimpleExcelConfig {
 
