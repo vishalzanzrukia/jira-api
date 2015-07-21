@@ -5,6 +5,7 @@ import java.io.File;
 /**
  * @author vishal.zanzrukia
  * @since 26 May 2015
+ * @version 1.0
  */
 public class GenericUtils {
 
