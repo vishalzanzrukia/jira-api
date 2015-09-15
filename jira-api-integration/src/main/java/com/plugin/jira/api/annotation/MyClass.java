@@ -3,7 +3,20 @@ package com.plugin.jira.api.annotation;
 import java.lang.reflect.Proxy;
 
 public class MyClass implements MyInterface {
+  
+  private static MyClass INSTANCE = null;
+  
+  private MyClass(){
+  }
 
+  public static MyClass getInstance(){
+    System.out.println("creating instance");
+    if(INSTANCE == null){
+      INSTANCE = new MyClass();
+    }
+    return INSTANCE;
+  }
+  
   @MyAnnotation
   public void test() {
     System.out.println("Inside test");

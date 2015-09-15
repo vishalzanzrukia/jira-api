@@ -13,6 +13,7 @@ import javax.lang.model.element.TypeElement;
 @SupportedAnnotationTypes("com.plugin.jira.api.annotation.Transactional")
 public class TransactionalProcessor extends AbstractProcessor {
   
+  
   @Override
   public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
 

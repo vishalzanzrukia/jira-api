@@ -1,12 +1,9 @@
-package com.plugin.jira.api.util;
+package com.plugin.jira.api.temp;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.File;
+import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -18,8 +15,14 @@ import java.net.URLEncoder;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSession;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.commons.codec.binary.Base64;
+import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 /**
  * It will contain all the methods related to HTTP connection
@@ -31,9 +34,9 @@ import org.apache.commons.codec.binary.Base64;
 public class HTTPUtils {
   
   
-  private static final String API_PASSWORD = "TopSecret!"; 
-  private static final String API_USERNAME = "something@something";
-  private static final String API_URL = "https://something.com/helloword";
+  private static final String SHOPRUNNER_API_PASSWORD = "KEuJg1a8j2k"; 
+  private static final String SHOPRUNNER_API_USERNAME = "claire@shoprunner.com.shoprunner";
+  private static final String SHOPRUNNER_API_URL = "https://api.shoprunner.com/validateToken";
   private static final String POST = "POST";
   private static HttpURLConnection connection = null;
   
@@ -52,7 +55,7 @@ public class HTTPUtils {
   
   public void initialiseServer() throws ProtocolException, MalformedURLException, IOException{
     HttpsURLConnection.setDefaultHostnameVerifier(hv);  
-    URL url = new URL(API_URL);
+    URL url = new URL(SHOPRUNNER_API_URL);
     connection = (HttpURLConnection)url.openConnection();
     connection.setRequestMethod(POST);
    
@@ -62,7 +65,8 @@ public class HTTPUtils {
     }*/
     
     // Create the Authorization Header
-    String encodedCredential = Base64.encodeBase64String((API_USERNAME+ ":" + API_PASSWORD).getBytes()); 
+    byte[] bytes =(SHOPRUNNER_API_USERNAME+ ":" + SHOPRUNNER_API_PASSWORD).getBytes();
+    String encodedCredential = new String(Base64.encodeBase64(bytes)); 
     connection.setRequestProperty("Authorization", "BASIC " + encodedCredential);
     connection.setDoOutput(true);
     
@@ -80,7 +84,7 @@ public class HTTPUtils {
       
       connection.connect();
    // Read it all and print it out
-//      BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+      BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
       
      /* String line = null;
       StringBuffer sbf = new StringBuffer();
@@ -93,19 +97,19 @@ public class HTTPUtils {
 //      System.out.println("response : "+sbf.toString());
       
       StringBuilder response = new StringBuilder();
-//      String strBuffer = "";
+      String strBuffer = "";
       try {
-         /* while (strBuffer != null) {
+          while (strBuffer != null) {
               response.append(strBuffer);
               response.append("\n");
               strBuffer = br.readLine();
-          }*/
+          }
           
           
-          InputStream responseBodyStream = connection.getInputStream();
+         /* InputStream responseBodyStream = connection.getInputStream();
           while ((read = responseBodyStream.read(buffer)) != -1) {
             response.append(new String(buffer, 0, read));
-          }
+          }*/
           
       }
       catch (IOException ioe) {
@@ -120,12 +124,32 @@ public class HTTPUtils {
 //      System.out.println(response);
       return response.toString(); 
   }
+  
+  public static Document getXmlStringAsDocument(String xml, boolean validate) throws ParserConfigurationException, IOException, SAXException {
+
+		InputSource is = new InputSource(new ByteArrayInputStream(xml.getBytes()));
+
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+
+
+		dbf.setNamespaceAware(true);
+		dbf.setValidating(validate);
+
+		DocumentBuilder db = dbf.newDocumentBuilder();
+//		db.setErrorHandler(new DocBuilderLog4jErrorHandler(log));
+
+		Document doc = db.parse(is);
+
+		return doc;
+	}
 
   
-  public static void main(String[] args) throws MalformedURLException, FileNotFoundException, IOException {
+  public static void main(String[] args) throws MalformedURLException, FileNotFoundException, IOException, ParserConfigurationException, SAXException {
     HTTPUtils util =  new HTTPUtils();
     util.initialiseServer();
     
-    System.out.println(util.validateToken("cc2f8a5c90142f209db66de5391f6f22"));
+    
+    Document xmlDocument = getXmlStringAsDocument(util.validateToken("cc2f8a5c90142f209db66de5391f6f22"), false);
+	System.out.println("done parsing");
   }
 }
